@@ -1,0 +1,48 @@
+import unittest
+from random import randint
+import NSquaredSort
+
+#TODO: write actual unit tests... determine granularity of a unit test.
+# Possibly check the functions below or is that too granular?
+
+def check_sorted(candidate_list, ascending):
+
+    # Vaccuous Case
+    if len(candidate_list) <= 1:
+        return True
+
+    if ascending:
+        for item in range(0, len(candidate_list) - 1):
+            if candidate_list[item] > candidate_list[item + 1]:
+                return False
+        return True
+
+    else:
+        for item in range(0, len(candidate_list) - 1):
+            if candidate_list[item] < candidate_list[item + 1]:
+                return False
+        return True
+
+
+def create_random_list(size, high_range, low_range=0):
+    random_list = []
+    for each in range(0, size):
+        rand_num = randint(low_range, high_range)
+        random_list.append(rand_num)
+    return random_list
+
+
+# def create_sorted_random_list(size, high_range, low_range=0):
+#     random_list=[]
+#     for each
+
+
+A = create_random_list(10, 100, -100)
+print(A)
+print(check_sorted(A, ascending=True))
+
+NSquaredSort.selection_sort(A)
+
+print(A)
+print(check_sorted(A, ascending=True))
+
