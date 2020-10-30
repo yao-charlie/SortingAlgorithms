@@ -27,7 +27,12 @@ def selectionSort(unsorted_list):
     return unsorted_list
 
 
-def cycleSort(unsorted_list):
+def pseudoCycleSort(unsorted_list):
+    # My implementation trades off one count on each item by using a dictionary to keep track of cycles visited.
+    # Memory complexity = 3n (well, need to check dictionary memory complexity) - could trade off a little time
+    # to implement a set.
+    # Time complexity = O(n^2) still but maybe O(n^2/k) where k is the number of loops?
+
     # need check for empty list due to list index to start logic.
     if not unsorted_list:
         return unsorted_list
@@ -68,8 +73,9 @@ def cycleSort(unsorted_list):
         # Swap values
         item_value, unsorted_list[item_index] = unsorted_list[item_index], item_value
 
-        # need to prevent loops so need to keep track of sorted items - but does that increase writes, negating cycle
+        # Q: need to prevent loops so need to keep track of sorted items - but does that increase writes, negating cycle
         # advantage? Necessary evil?
+        # A: apparently not - just brute force each item to see if it's in the right place every time you visit it.
 
         sorted_indexes[item_index] = item_index
 
