@@ -1,6 +1,7 @@
 import unittest
 from random import randint, shuffle
 import NSquaredSort
+import nlognSort
 import copy
 
 
@@ -42,7 +43,7 @@ def createRandomList(size, high_range, low_range=0):
 A = createRandomList(10, 100, -100)
 
 
-# A = [1,0,2,4,3]
+A = [75, 43, 96, 13, -76, -79, 93, 99, 78, 50]
 # B = [4,3,2,0,1]
 # C = [3, 4, 3, 4, 4]
 # A = [1, 2, 3, 4, 5]
@@ -62,14 +63,20 @@ def test(sort_algo):
         random_list = createRandomList(100, 100, -100)
         original_list = copy.deepcopy(random_list)
         sort_algo(random_list)
-        assert (len(random_list) == len(original_list))  # check length does not change
-        assert (checkSorted(random_list))  # check if the list is sorted
-        assert (set(random_list).intersection(original_list))  # check if all elements exist
+
+        # check length does not change
+        assert (len(random_list) == len(original_list)), f"Length equality failed. Original list is {original_list}, mutad list is {random_list}"
+
+        # check if the list is sorted
+        assert (checkSorted(random_list)), f"checkSorted failed. Original list is {original_list}, mutad list is {random_list}"
+
+        # check if all elements exist
+        assert (set(random_list).intersection(original_list)) , f"Set equality failed. Original list is {original_list}, mutad list is {random_list}"
 
 
 # print(A)
 # print(checkSorted(A, ascending=True))
-# NSquaredSort.cycleSort(A)
+# nlognSort.quickSort(A)
 # print(A)
 # print(checkSorted(A, ascending=True))
 #
@@ -85,4 +92,5 @@ def test(sort_algo):
 # test(NSquaredSort.selectionSort)
 # test(NSquaredSort.insertionSort)
 # test(NSquaredSort.bubbleSort)
-test(NSquaredSort.cycleSort)
+# test(NSquaredSort.cycleSort)
+test(nlognSort.quickSort)
