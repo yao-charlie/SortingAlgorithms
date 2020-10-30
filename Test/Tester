@@ -1,12 +1,13 @@
 import unittest
-from random import randint
+from random import randint, shuffle
 import NSquaredSort
 
-#TODO: write actual unit tests... determine granularity of a unit test.
+
+# TODO: write actual unit tests... determine granularity of a unit test.
 # Possibly check the functions below or is that too granular?
 
-def check_sorted(candidate_list, ascending):
 
+def checkSorted(candidate_list, ascending=True):
     # Vaccuous Case
     if len(candidate_list) <= 1:
         return True
@@ -24,7 +25,7 @@ def check_sorted(candidate_list, ascending):
         return True
 
 
-def create_random_list(size, high_range, low_range=0):
+def createRandomList(size, high_range, low_range=0):
     random_list = []
     for each in range(0, size):
         rand_num = randint(low_range, high_range)
@@ -37,12 +38,32 @@ def create_random_list(size, high_range, low_range=0):
 #     for each
 
 
-A = create_random_list(10, 100, -100)
+# A = createRandomList(10, 100, -100)
+# A = [1,0,2,4,3]
+# A = [4,3,2,0,1]
+# A = [3, 4, 3, 4, 4]
+A = [1]
+
+def test(sort_algo):
+    assert (checkSorted(sort_algo([1, 2, 3, 4, 5])))  # true case
+    assert (checkSorted(sort_algo([1])))  # trivial case
+    assert (checkSorted(sort_algo([1, 1, 1, 1, 1])))  # trivial case with multiple entries
+    assert (checkSorted(sort_algo([])))  # vaccuous case
+    assert (checkSorted(sort_algo([4, 3, 0, 2, 1])))  # 1-loop case
+    assert (checkSorted(sort_algo([1, 2, 0, 4, 3])))  # 2-loop case
+    assert (checkSorted(sort_algo([1, 0, 2, 4, 3])))  # 3-loop case
+    assert (checkSorted(sort_algo([1, 2, 1, 1, 2])))  # repeated elements case
+
+
 print(A)
-print(check_sorted(A, ascending=True))
+print(checkSorted(A, ascending=True))
 
-NSquaredSort.selection_sort(A)
+NSquaredSort.cycleSort(A)
 
 print(A)
-print(check_sorted(A, ascending=True))
+print(checkSorted(A, ascending=True))
 
+# test(NSquaredSort.selectionSort)
+# test(NSquaredSort.insertionSort)
+# test(NSquaredSort.bubbleSort)
+# test(NSquaredSort.cycleSort)
