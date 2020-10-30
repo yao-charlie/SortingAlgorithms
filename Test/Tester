@@ -1,14 +1,15 @@
 import unittest
 from random import randint, shuffle
 import NSquaredSort
+import copy
 
 
-# TODO: write actual unit tests... determine granularity of a unit test.
+# TODO: expand unit tests, check test functions? Check unittest import documentation
 # Possibly check the functions below or is that too granular?
 
 
 def checkSorted(candidate_list, ascending=True):
-    # Vaccuous Case
+    # Vacuous Case
     if len(candidate_list) <= 1:
         return True
 
@@ -38,32 +39,50 @@ def createRandomList(size, high_range, low_range=0):
 #     for each
 
 
-# A = createRandomList(10, 100, -100)
+A = createRandomList(10, 100, -100)
+
+
 # A = [1,0,2,4,3]
-# A = [4,3,2,0,1]
-# A = [3, 4, 3, 4, 4]
-A = [1]
+# B = [4,3,2,0,1]
+# C = [3, 4, 3, 4, 4]
+# A = [1, 2, 3, 4, 5]
 
 def test(sort_algo):
     assert (checkSorted(sort_algo([1, 2, 3, 4, 5])))  # true case
     assert (checkSorted(sort_algo([1])))  # trivial case
     assert (checkSorted(sort_algo([1, 1, 1, 1, 1])))  # trivial case with multiple entries
-    assert (checkSorted(sort_algo([])))  # vaccuous case
+    assert (checkSorted(sort_algo([])))  # vacuous case
     assert (checkSorted(sort_algo([4, 3, 0, 2, 1])))  # 1-loop case
     assert (checkSorted(sort_algo([1, 2, 0, 4, 3])))  # 2-loop case
     assert (checkSorted(sort_algo([1, 0, 2, 4, 3])))  # 3-loop case
     assert (checkSorted(sort_algo([1, 2, 1, 1, 2])))  # repeated elements case
 
+    for _ in range(10):
+        # add tests to ensure algo doesn't change element count and number.
+        random_list = createRandomList(100, 100, -100)
+        original_list = copy.deepcopy(random_list)
+        sort_algo(random_list)
+        assert (len(random_list) == len(original_list))  # check length does not change
+        assert (checkSorted(random_list))  # check if the list is sorted
+        assert (set(random_list).intersection(original_list))  # check if all elements exist
 
-print(A)
-print(checkSorted(A, ascending=True))
 
-NSquaredSort.cycleSort(A)
-
-print(A)
-print(checkSorted(A, ascending=True))
-
+# print(A)
+# print(checkSorted(A, ascending=True))
+# NSquaredSort.cycleSort(A)
+# print(A)
+# print(checkSorted(A, ascending=True))
+#
+# print(B)
+# NSquaredSort.cycleSort(B)
+# print(B)
+# print(checkSorted(B, ascending=True))
+#
+# print(C)
+# NSquaredSort.cycleSort(C)
+# print(C)
+# print(checkSorted(C, ascending=True))
 # test(NSquaredSort.selectionSort)
 # test(NSquaredSort.insertionSort)
 # test(NSquaredSort.bubbleSort)
-# test(NSquaredSort.cycleSort)
+test(NSquaredSort.cycleSort)
