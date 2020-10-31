@@ -43,9 +43,9 @@ def createRandomList(size, high_range, low_range=0):
 A = createRandomList(10, 100, -100)
 
 
-A = [75, 43, 96, 13, -76, -79, 93, 99, 78, 50]
-# B = [4,3,2,0,1]
-# C = [3, 4, 3, 4, 4]
+# A = [75, 43, 96, 13, -76, -79, 93, 99, 78, 50]
+# A = [4,3,2,0,1]
+A = [1, 2, 1, 1, 2]
 # A = [1, 2, 3, 4, 5]
 
 def test(sort_algo):
@@ -74,11 +74,11 @@ def test(sort_algo):
         assert (set(random_list).intersection(original_list)) , f"Set equality failed. Original list is {original_list}, mutad list is {random_list}"
 
 
-# print(A)
-# print(checkSorted(A, ascending=True))
-# nlognSort.quickSort(A)
-# print(A)
-# print(checkSorted(A, ascending=True))
+print(A)
+print(checkSorted(A, ascending=True))
+nlognSort.mergeSort(A)
+print(A)
+print(checkSorted(A, ascending=True))
 #
 # print(B)
 # NSquaredSort.cycleSort(B)
@@ -92,5 +92,6 @@ def test(sort_algo):
 # test(NSquaredSort.selectionSort)
 # test(NSquaredSort.insertionSort)
 # test(NSquaredSort.bubbleSort)
-# test(NSquaredSort.cycleSort)
-test(nlognSort.quickSort)
+# test(NSquaredSort.pseudoCycleSort)
+# test(nlognSort.quickSort)
+# test(nlognSort.mergeSort)

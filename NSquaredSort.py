@@ -29,9 +29,11 @@ def selectionSort(unsorted_list):
 
 def pseudoCycleSort(unsorted_list):
     # My implementation trades off one count on each item by using a dictionary to keep track of cycles visited.
-    # Memory complexity = 3n (well, need to check dictionary memory complexity) - could trade off a little time
-    # to implement a set.
-    # Time complexity = O(n^2) still but maybe O(n^2/k) where k is the number of loops?
+    # Memory complexity ~= 2n (changed dict to set). Using dict could be useful to index # of duplicate items:
+    # {index: [value, #]}
+    # Edit: writes can still be minimized but more 'faster memory' is required. Better for flash, worse for EEPROM.
+    # Time complexity = O(n^2) still but maybe O(n^2/k) where k is the number of loops? Seems reasonable - n^2 if k = 1
+    # n if k = n loops, meaning all items are in the right place already.
 
     # need check for empty list due to list index to start logic.
     if not unsorted_list:
@@ -39,7 +41,7 @@ def pseudoCycleSort(unsorted_list):
 
     # initialize values
     item_index = 0
-    sorted_indexes = {}
+    sorted_indexes = set()
     item_value = unsorted_list[item_index]
     list_size = len(unsorted_list)
     loop_root = item_index
@@ -77,7 +79,7 @@ def pseudoCycleSort(unsorted_list):
         # advantage? Necessary evil?
         # A: apparently not - just brute force each item to see if it's in the right place every time you visit it.
 
-        sorted_indexes[item_index] = item_index
+        sorted_indexes.add(item_index)
 
         # check if we've completed a loop
         if item_index == loop_root:
