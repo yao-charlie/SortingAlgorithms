@@ -65,14 +65,31 @@ def test(sort_algo):
         sort_algo(random_list)
 
         # check length does not change
-        assert (len(random_list) == len(original_list)), f"Length equality failed. Original list is {original_list}, mutad list is {random_list}"
+        assert (len(random_list) == len(original_list)), f"Length equality failed. Original list is {original_list}, mutated list is {random_list}"
 
         # check if the list is sorted
-        assert (checkSorted(random_list)), f"checkSorted failed. Original list is {original_list}, mutad list is {random_list}"
+        assert (checkSorted(random_list)), f"checkSorted failed. Original list is {original_list}, mutated list is {random_list}"
 
         # check if all elements exist
-        assert (set(random_list).intersection(original_list)) , f"Set equality failed. Original list is {original_list}, mutad list is {random_list}"
+        assert (set(random_list).intersection(original_list)) , f"Set equality failed. Original list is {original_list}, mutated list is {random_list}"
 
+
+
+# # to test mergeSort as need to figure out how to mutate in place from a single function:
+# for _ in range(10):
+#     random_list = createRandomList(100, 10, -10)
+#     original_list = copy.deepcopy(random_list)
+#     random_list = nlognSort.mergeSortAlgo(random_list)
+#     # check length does not change
+#     assert (len(random_list) == len(
+#         original_list)), f"Length equality failed. Original list is {original_list}, mutad list is {random_list}"
+#
+#     # check if the list is sorted
+#     assert (checkSorted(random_list)), f"checkSorted failed. Original list is {original_list}, mutated list is {random_list}"
+#
+#     # check if all elements exist
+#     assert (set(random_list).intersection(
+#         original_list)), f"Set equality failed. Original list is {original_list}, mutated list is {random_list}"
 
 print(A)
 print(checkSorted(A, ascending=True))
