@@ -28,12 +28,17 @@ def selectionSort(unsorted_list):
 
 
 def pseudoCycleSort(unsorted_list):
-    # My implementation trades off one count on each item by using a dictionary to keep track of cycles visited.
+    # My implementation trades off one count on each item by using a set to keep track of cycles visited.
     # Memory complexity ~= 2n (changed dict to set). Using dict could be useful to index # of duplicate items:
     # {index: [value, #]}
     # Edit: writes can still be minimized but more 'faster memory' is required. Better for flash, worse for EEPROM.
-    # Time complexity = O(n^2) still but maybe O(n^2/k) where k is the number of loops? Seems reasonable - n^2 if k = 1
-    # n if k = n loops, meaning all items are in the right place already.
+    # Thus, writes to EEPROM could be minimized but may not be better than selection sort in general for memory
+    # complexity.
+
+    # Time complexity = O(n^2) still but maybe O(n^2/k) where k is the number of loops? Not quite: compare two loops,
+    # one with n-1 elements and 1 element (sorted) vs 2x n/2 loops. In the first, it's still close to n^2 where the
+    # second is (n^2 /2 + n^2 / 4) - may not be generalizable as you need info on the complexity of the loops.
+
 
     # need check for empty list due to list index to start logic.
     if not unsorted_list:
