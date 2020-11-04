@@ -31,7 +31,10 @@ def mergeSort(unsorted_list):
     #     unsorted_list[i] = A[i]
     #     i += 1
 
-    for index, value in enumerate(unsorted_list):
+    # for index, value in enumerate(unsorted_list):
+    #     unsorted_list[index] = placeholder_list[index]
+
+    for index in range(len(unsorted_list)):
         unsorted_list[index] = placeholder_list[index]
 
     return unsorted_list
